@@ -6418,38 +6418,6 @@
             </div>
         </div>
     </div>
-    <!-- Tier-Wise Access Logic -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const userStr = localStorage.getItem('adminUser');
-            if (userStr) {
-                try {
-                    const user = JSON.parse(userStr);
-                    const tier = user.tier || 'tier1';
-                    
-                    const titleEl = document.getElementById('view-title');
-
-                    if (tier === 'tier1') {
-                        if(titleEl) titleEl.innerText = "Owner Dashboard";
-                    } else if (tier === 'tier2') {
-                        if(titleEl) titleEl.innerText = "Manager & Financer Dashboard";
-                        ['nav-settings'].forEach(id => {
-                            const el = document.getElementById(id);
-                            if (el) el.style.display = 'none';
-                        });
-                    } else if (tier === 'tier3') {
-                        if(titleEl) titleEl.innerText = "Staff Dashboard";
-                        ['nav-reports', 'nav-marketing', 'nav-settings', 'nav-clients', 'nav-services-stats'].forEach(id => {
-                            const el = document.getElementById(id);
-                            if (el) el.style.display = 'none';
-                        });
-                    }
-                } catch(e) {
-                    console.error("Error applying tier logic", e);
-                }
-            }
-        });
-    </script>
 </body>
 
 </html>

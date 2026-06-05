@@ -7187,9 +7187,10 @@
       "name": "balaji",
       "phone": "6300188680",
       "email": "",
-      "pts": 0,
-      "ltv": "₹1,500",
-      "av": "av-p"
+      "pts": 5,
+      "ltv": "₹1,650",
+      "av": "av-p",
+      "branchId": "b1778745632452"
     },
     {
       "id": "c800",
@@ -7329,6 +7330,29 @@
       "ltv": "₹5,350",
       "joinedDate": "2026-05-21T18:30:00.000Z",
       "av": "av-t"
+    },
+    {
+      "id": "c814",
+      "name": "sunny",
+      "phone": "9573555722",
+      "location": "bengalore",
+      "email": "",
+      "pts": 0,
+      "ltv": "₹250",
+      "joinedDate": "2026-05-15T18:30:00.000Z",
+      "av": "av-b"
+    },
+    {
+      "id": "c814",
+      "name": "krishna",
+      "phone": "8500113935",
+      "location": "",
+      "email": "",
+      "pts": 0,
+      "ltv": "₹250",
+      "joinedDate": "2026-05-17T18:30:00.000Z",
+      "av": "av-t",
+      "branchId": "b1"
     }
   ],
   "staff": [
@@ -9015,7 +9039,7 @@
       "id": "i1",
       "name": "Luxury Hair Color",
       "cat": "Hair",
-      "stock": 1,
+      "stock": 100,
       "min": 5,
       "unit": "units",
       "cost": 2000
@@ -9529,6 +9553,62 @@
       "location": "",
       "deposit": false,
       "createdAt": "2026-05-13T06:59:02.205Z"
+    },
+    {
+      "id": "GS-79471",
+      "clientId": "c814",
+      "clientName": "sunny",
+      "services": [
+        "svc-1778241632174"
+      ],
+      "staffId": "st5",
+      "date": "2026-05-16",
+      "time": "15:00",
+      "total": 250,
+      "status": "upcoming",
+      "notes": "",
+      "source": "walk-in",
+      "location": "bengalore",
+      "deposit": false,
+      "createdAt": "2026-05-14T14:05:40.005Z"
+    },
+    {
+      "id": "GS-93443",
+      "clientId": "c799",
+      "clientName": "balaji",
+      "services": [
+        "svc-1778241632118"
+      ],
+      "staffId": "st6",
+      "date": "2026-05-16",
+      "time": "17:30",
+      "total": 150,
+      "status": "upcoming",
+      "notes": "",
+      "source": "walk-in",
+      "location": "",
+      "deposit": false,
+      "createdAt": "2026-05-16T05:56:04.125Z",
+      "branchId": "b1778745632452"
+    },
+    {
+      "id": "GS-72824",
+      "clientId": "c814",
+      "clientName": "krishna",
+      "services": [
+        "svc-1778241632174"
+      ],
+      "staffId": "st5",
+      "date": "2026-05-18",
+      "time": "17:00",
+      "total": 250,
+      "status": "upcoming",
+      "notes": "",
+      "source": "walk-in",
+      "location": "",
+      "deposit": false,
+      "createdAt": "2026-05-16T12:19:04.883Z",
+      "branchId": "b1"
     }
   ],
   "events": [
@@ -9563,6 +9643,327 @@
       "description": "",
       "date": "2026-05-14",
       "id": "ev1778583992454"
+    }
+  ],
+  "branches": [
+    {
+      "id": "b1",
+      "name": "Main Branch",
+      "location": "Default Location",
+      "phone": "9876543210",
+      "verificationStatus": "Approved",
+      "status": "Active",
+      "lastActivity": "14 days ago",
+      "subscription": {
+        "plan": "Premium Growth Plan",
+        "price": "₹4,999/mo",
+        "expiry": "2027-05-24",
+        "status": "Active"
+      },
+      "chainId": "chain-1780153497996",
+      "chainName": "Independent",
+      "staffCount": 0,
+      "servicesCount": 0,
+      "bookingCount": 1,
+      "grossRevenue": 250,
+      "brandCode": "MD-EDBAB455",
+      "pingLatency": "16ms",
+      "gpsCoords": "17.3850° N, 78.4867° E",
+      "dbSyncTime": "20:25:54"
+    },
+    {
+      "id": "b1778745632452",
+      "name": "sharan branch",
+      "location": "dilshuknagar",
+      "phone": "7396269877",
+      "verificationStatus": "Approved",
+      "status": "Active",
+      "lastActivity": "14 days ago",
+      "subscription": {
+        "plan": "Premium Growth Plan",
+        "price": "₹4,999/mo",
+        "expiry": "2027-05-24",
+        "status": "Active"
+      },
+      "chainId": "chain-1780153497996",
+      "chainName": "Independent",
+      "staffCount": 0,
+      "servicesCount": 0,
+      "bookingCount": 1,
+      "grossRevenue": 150,
+      "brandCode": "MD-BEEE33C3",
+      "pingLatency": "16ms",
+      "gpsCoords": "17.3685° N, 78.5316° E",
+      "dbSyncTime": "20:26:20"
+    },
+    {
+      "id": "br-g197",
+      "name": "balaji",
+      "location": "hyderabad",
+      "phone": "6300188680",
+      "verificationStatus": "Approved",
+      "status": "Active"
+    },
+    {
+      "id": "b-1778933722353",
+      "name": "sriya beauty",
+      "location": "hyderabad",
+      "phone": "9515239877",
+      "verificationStatus": "Approved",
+      "status": "Active"
+    },
+    {
+      "id": "b-1779811438852",
+      "name": "Test Branch",
+      "location": "City Center",
+      "phone": "1234567890",
+      "chainId": null,
+      "email": "testbranch@medika.com",
+      "password": "branch123",
+      "status": "Active",
+      "verificationStatus": "Approved"
+    },
+    {
+      "id": "b-1779881286515",
+      "name": "Glamour Salon",
+      "location": "Delhi",
+      "phone": "9999888877",
+      "chainId": null,
+      "email": "glamour@gmail.com",
+      "password": "glamourpassword",
+      "aadhaarNumber": "123456789012",
+      "aadhaarDoc": "",
+      "panNumber": "ABCDE1234F",
+      "panDoc": "",
+      "addressProofType": "Electricity Bill",
+      "addressProofDoc": "",
+      "verificationStatus": "Approved",
+      "status": "Active",
+      "verificationNotes": "approved",
+      "verifiedAt": "2026-05-27T13:40:37.929Z",
+      "verifiedBy": "admin@medika.com"
+    },
+    {
+      "id": "b-1779882878725",
+      "name": "Edge Case Salon",
+      "location": "Mumbai",
+      "phone": "9898989898",
+      "chainId": null,
+      "email": "edgecase@gmail.com",
+      "password": "edgepassword",
+      "aadhaarNumber": "999988887777",
+      "aadhaarDoc": "",
+      "panNumber": "EDGEC1234P",
+      "panDoc": "",
+      "addressProofType": "GST Certificate",
+      "addressProofDoc": "",
+      "verificationStatus": "Rejected",
+      "status": "Suspended",
+      "verificationNotes": "Missing uploaded copies.",
+      "verifiedAt": "2026-05-27T12:17:07.166Z",
+      "verifiedBy": "admin@medika.com"
+    },
+    {
+      "id": "b-1779884330492",
+      "name": "Glamour East",
+      "location": "East Delhi",
+      "phone": "9876543210",
+      "chainId": null,
+      "email": "glamoureast@gmail.com",
+      "password": "password",
+      "aadhaarNumber": "121212121212",
+      "aadhaarDoc": "",
+      "panNumber": "PANEA1234E",
+      "panDoc": "",
+      "addressProofType": "GST Certificate",
+      "addressProofDoc": "",
+      "verificationStatus": "Approved",
+      "status": "Active",
+      "verificationNotes": "Documents approved.",
+      "verifiedAt": "2026-05-27T12:20:04.305Z",
+      "verifiedBy": "admin@medika.com"
+    }
+  ],
+  "admins": [
+    {
+      "email": "admin@medika.com",
+      "password": "admin",
+      "name": "Founder (Tier 1)",
+      "role": "super",
+      "tier": 1,
+      "status": "Active"
+    },
+    {
+      "email": "cto@medika.com",
+      "password": "cto",
+      "name": "CTO (Tier 2)",
+      "role": "super",
+      "tier": 2,
+      "status": "Active"
+    },
+    {
+      "email": "sales@medika.com",
+      "password": "sales",
+      "name": "Sales Lead (Tier 3)",
+      "role": "super",
+      "tier": 3,
+      "status": "Active"
+    },
+    {
+      "email": "care@medika.com",
+      "password": "care",
+      "name": "Support Agent (Tier 4)",
+      "role": "super",
+      "tier": 4,
+      "status": "Active"
+    },
+    {
+      "name": "Test Owner",
+      "email": "testowner@medika.com",
+      "branchId": "b1",
+      "password": "test1234",
+      "role": "branch",
+      "status": "Active"
+    },
+    {
+      "name": "sharan asthetics",
+      "email": "gajawadasaisharan@gmail.com",
+      "branchId": "b1778745632452",
+      "password": "ReR82prd",
+      "role": "branch",
+      "status": "Active"
+    },
+    {
+      "name": "balaji asthetics",
+      "email": "balaji323333@gmail.com",
+      "branchId": "b1",
+      "password": "balaji33",
+      "role": "branch",
+      "status": "Active"
+    },
+    {
+      "name": "new sharan",
+      "email": "newsharan@gmail.com",
+      "password": "sharan",
+      "branchId": "b1778745632452",
+      "role": "admin",
+      "status": "Active"
+    },
+    {
+      "name": "Branch Owner (Tier 1)",
+      "email": "owner@branch.com",
+      "password": "owner",
+      "role": "owner",
+      "branchId": "b1",
+      "status": "Active"
+    },
+    {
+      "name": "Branch Manager (Tier 2)",
+      "email": "manager@branch.com",
+      "password": "manager",
+      "role": "manager",
+      "branchId": "b1",
+      "status": "Active"
+    },
+    {
+      "name": "Finance Manager (Tier 2)",
+      "email": "finance@branch.com",
+      "password": "finance",
+      "role": "finance",
+      "branchId": "b1",
+      "status": "Active"
+    },
+    {
+      "name": "Receptionist (Tier 3)",
+      "email": "reception@branch.com",
+      "password": "reception",
+      "role": "reception",
+      "branchId": "b1",
+      "status": "Active"
+    },
+    {
+      "email": "jane@doe.com",
+      "name": "Jane Doe",
+      "password": "password123password123",
+      "role": "owner",
+      "chainId": "chain-1780153497996",
+      "status": "Active"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "exp-1",
+      "branchId": "b1",
+      "amount": 25000,
+      "date": "2026-05-01",
+      "category": "Rent",
+      "title": "Monthly Salon Rent - May",
+      "notes": "Paid to landlord for May 2026"
+    },
+    {
+      "id": "exp-2",
+      "branchId": "b1",
+      "amount": 4800,
+      "date": "2026-05-05",
+      "category": "Utilities",
+      "title": "Electricity & Wi-Fi Bill",
+      "notes": "Auto-debited from business account"
+    },
+    {
+      "id": "exp-3",
+      "branchId": "b1",
+      "amount": 8500,
+      "date": "2026-05-10",
+      "category": "Marketing",
+      "title": "Instagram & Local Ads Campaign",
+      "notes": "Paid to marketing agency"
+    },
+    {
+      "id": "exp-4",
+      "branchId": "b1",
+      "amount": 3200,
+      "date": "2026-05-12",
+      "category": "Supplies",
+      "title": "Salon Cleaning & Towel Supplies",
+      "notes": "Purchase of towels and disinfectants"
+    },
+    {
+      "id": "exp-5",
+      "branchId": "b1",
+      "amount": 12000,
+      "date": "2026-05-15",
+      "category": "Inventory Refills",
+      "title": "Hair Color & Shampoo Stock refill",
+      "notes": "L'Oreal and Matrix products stock purchase"
+    },
+    {
+      "id": "exp-6",
+      "branchId": "b1",
+      "amount": 25000,
+      "date": "2026-04-01",
+      "category": "Rent",
+      "title": "Monthly Salon Rent - April",
+      "notes": "Paid landlord for April 2026"
+    },
+    {
+      "id": "exp-7",
+      "branchId": "b1",
+      "amount": 4500,
+      "date": "2026-04-05",
+      "category": "Utilities",
+      "title": "Electricity & Wi-Fi Bill - April",
+      "notes": "April utility bill"
+    }
+  ],
+  "chains": [
+    {
+      "id": "chain-1780153497996",
+      "name": "Test Chain Group",
+      "ownerName": "Jane Doe",
+      "ownerEmail": "jane@doe.com",
+      "ownerPhone": "9876543210",
+      "status": "Active",
+      "ownerPassword": "password123password123"
     }
   ]
 }

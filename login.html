@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedikaArts | Secure Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0f172a;
+            --accent-1: #3b82f6;
+            --accent-2: #8b5cf6;
+            --accent-3: #ec4899;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --input-bg: rgba(15, 23, 42, 0.6);
+            --error-color: #ef4444;
+            --success-color: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Elements */
+        .bg-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.5;
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-1);
+            top: -100px;
+            left: -100px;
+        }
+
+        .shape-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-2);
+            bottom: -200px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-3);
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -10s;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 30px) scale(1.1); }
+            100% { transform: translate(-30px, 80px) scale(0.9); }
+        }
+
+        /* Main Container */
+        .auth-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 480px;
+            padding: 2rem;
+            perspective: 1000px;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: cardEnter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes cardEnter {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Header */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5);
+        }
+
+        .brand-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-subtitle {
+            font-size: 14px;
+            color: var(--accent-1);
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2em;
+            cursor: pointer;
+        }
+
+        select.form-control option {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        /* OTP Inputs */
+        .otp-wrapper {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin: 2rem 0;
+        }
+
+        .otp-input {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .otp-input:focus {
+            outline: none;
+            border-color: var(--accent-1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Steps Slider */
+        .slider-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .slider-track {
+            display: flex;
+            width: 400%; /* 4 steps */
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-step {
+            width: 25%;
+            flex-shrink: 0;
+            padding: 0 0.5rem; /* buffer */
+        }
+
+        /* Utilities */
+        .text-center { text-align: center; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        
+        .forgot-link {
+            display: inline-block;
+            font-size: 13px;
+            color: var(--accent-1);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .forgot-link:hover {
+            color: var(--accent-2);
+            text-decoration: underline;
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .desc-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Alert Messages */
+        .alert {
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            display: none;
+            animation: slideDown 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #6ee7b7;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sandbox Console */
+        .sandbox-console {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 380px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            transform: translateY(150%);
+            animation: slideInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 1s forwards;
+        }
+
+        @keyframes slideInUp {
+            to { transform: translateY(0); }
+        }
+
+        .console-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+
+        .console-title {
+            color: var(--text-secondary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--success-color);
+        }
+
+        .console-body {
+            height: 120px;
+            overflow-y: auto;
+            color: #a5b4fc;
+        }
+
+        .console-body::-webkit-scrollbar { width: 4px; }
+        .console-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+        .log { margin-bottom: 6px; }
+        .log.info { color: #94a3b8; }
+        .log.success { color: #34d399; }
+        .log.warn { color: #fbbf24; }
+        .log.error { color: #f87171; }
+    </style>
+</head>
+<body>
+
+    <!-- Background Shapes -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="auth-container">
+        <div class="glass-card">
+            
+            <div class="brand-header">
+                <div class="logo">M</div>
+                <h1 class="brand-title">MedikaArts</h1>
+                <div class="brand-subtitle" id="portal-subtitle">Secure Gateway</div>
+            </div>
+
+            <div id="alert-box" class="alert"></div>
+
+            <div class="slider-container">
+                <div class="slider-track" id="steps-track">
+                    
+                    <!-- STEP 0: Login -->
+                    <div class="slide-step">
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" id="email" class="form-control" placeholder="manager@medika.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Access Level</label>
+                                <select id="access-tier" class="form-control" required>
+                                    <option value="tier1">Executive (Tier 1)</option>
+                                    <option value="tier2">Management (Tier 2)</option>
+                                    <option value="tier3">Staff (Tier 3)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="flex-between">
+                                    <label class="form-label mb-0">Password</label>
+                                    <a href="#" class="forgot-link" id="btn-goto-forgot" style="margin-top:0; font-size:12px;">Forgot Password?</a>
+                                </div>
+                                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-4" id="btn-login">
+                                Authenticate
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- STEP 1: 2FA -->
+                    <div class="slide-step">
+                        <form id="otp-form">
+                            <div class="text-center mb-4">
+                                <p class="desc-text">We've sent a secure 4-digit code to your device. Please enter it below.</p>
+                            </div>
+                            <div class="otp-wrapper" id="otp-inputs-container">
+                                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                                <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="btn-verify-2fa">Verify Code</button>
+                            <button type="button" class="btn btn-secondary" id="btn-back-from-2fa">Back to Login</button>
+                        </form>
+                    </div>
+
+                    <!-- STEP 2: Forgot Password -->
+                    <div class="slide-step">
+                        <form id="forgot-form">
+                            <div class="text-center mb-4">
+                                <p class="desc-text">Enter your registered email address to receive a password reset code.</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" id="forgot-email" class="form-control" placeholder="manager@medika.com" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-4" id="btn-send-forgot">Send Reset Code</button>
+                            <button type="button" class="btn btn-secondary" id="btn-back-from-forgot">Back to Login</button>
+                        </form>
+                    </div>
+
+                    <!-- STEP 3: Reset Password -->
+                    <div class="slide-step">
+                        <form id="reset-form">
+                            <div class="text-center mb-4">
+                                <p class="desc-text">Enter the 4-digit recovery code and create your new password.</p>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="form-label">Recovery Code</label>
+                                <div class="otp-wrapper mt-2 mb-4" id="recovery-otp-container" style="margin-top:0.5rem; margin-bottom: 1rem;">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required style="height:48px;">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required style="height:48px;">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required style="height:48px;">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required style="height:48px;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">New Password</label>
+                                <input type="password" id="new-password" class="form-control" placeholder="••••••••" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" id="confirm-password" class="form-control" placeholder="••••••••" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-4" id="btn-submit-reset">Reset Password</button>
+                            <button type="button" class="btn btn-secondary" id="btn-back-from-reset">Cancel</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Dev Console -->
+    <div class="sandbox-console">
+        <div class="console-header">
+            <div class="console-title">
+                <div class="status-dot"></div>
+                System Logs
+            </div>
+            <span style="font-size: 10px; background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">DEV</span>
+        </div>
+        <div class="console-body" id="console-logs">
+            <div class="log info">[System] Core modules initialized.</div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const stepsTrack = document.getElementById('steps-track');
+        const alertBox = document.getElementById('alert-box');
+        const portalSubtitle = document.getElementById('portal-subtitle');
+        const consoleLogs = document.getElementById('console-logs');
+
+        // Forms
+        const loginForm = document.getElementById('login-form');
+        const otpForm = document.getElementById('otp-form');
+        const forgotForm = document.getElementById('forgot-form');
+        const resetForm = document.getElementById('reset-form');
+
+        // Nav Buttons
+        const btnGotoForgot = document.getElementById('btn-goto-forgot');
+        const btnBackFrom2fa = document.getElementById('btn-back-from-2fa');
+        const btnBackFromForgot = document.getElementById('btn-back-from-forgot');
+        const btnBackFromReset = document.getElementById('btn-back-from-reset');
+
+        // State
+        let currentStep = 0;
+        let loggedInEmail = '';
+
+        // Logger
+        const log = (msg, type = 'info') => {
+            const time = new Date().toLocaleTimeString([], {hour12: false});
+            const div = document.createElement('div');
+            div.className = `log ${type}`;
+            div.innerHTML = `<span style="opacity:0.5">[${time}]</span> ${msg}`;
+            consoleLogs.appendChild(div);
+            consoleLogs.scrollTop = consoleLogs.scrollHeight;
+        };
+
+        // Alerts
+        const showAlert = (msg, isError = true) => {
+            alertBox.textContent = msg;
+            alertBox.className = `alert ${isError ? 'alert-error' : 'alert-success'}`;
+            alertBox.style.display = 'block';
+        };
+
+        const hideAlert = () => {
+            alertBox.style.display = 'none';
+        };
+
+        // Step Navigation
+        const goToStep = (index) => {
+            currentStep = index;
+            stepsTrack.style.transform = `translateX(-${index * 25}%)`;
+            hideAlert();
+
+            const subtitles = [
+                { text: 'Secure Gateway', color: 'var(--accent-1)' },
+                { text: 'Two-Factor Authentication', color: 'var(--accent-2)' },
+                { text: 'Account Recovery', color: 'var(--accent-3)' },
+                { text: 'Password Reset', color: 'var(--accent-3)' }
+            ];
+
+            portalSubtitle.textContent = subtitles[index].text;
+            portalSubtitle.style.color = subtitles[index].color;
+        };
+
+        // OTP Input Logic
+        const setupOtp = (containerId) => {
+            const container = document.getElementById(containerId);
+            const inputs = container.querySelectorAll('.otp-input');
+            
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    if (e.target.value.length === 1 && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const text = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 4);
+                    text.split('').forEach((char, i) => {
+                        if (inputs[i]) inputs[i].value = char;
+                    });
+                    if (text.length > 0) {
+                        inputs[Math.min(text.length, 3)].focus();
+                    }
+                });
+            });
+            return inputs;
+        };
+
+        const otpInputs = setupOtp('otp-inputs-container');
+        const recoveryOtpInputs = setupOtp('recovery-otp-container');
+
+        const getOtpValue = (inputs) => Array.from(inputs).map(i => i.value).join('');
+        const clearOtp = (inputs) => inputs.forEach(i => i.value = '');
+
+        // Form Submissions
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const btn = document.getElementById('btn-login');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = 'Authenticating...';
+            btn.disabled = true;
+            log(`Authenticating ${email}...`, 'info');
+
+            // Simulate API
+            await new Promise(r => setTimeout(r, 1000));
+            
+            loggedInEmail = email;
+            log('Credentials valid. Requesting 2FA.', 'success');
+            log('DEBUG: OTP is 1234', 'warn');
+            
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            goToStep(1);
+            setTimeout(() => otpInputs[0].focus(), 300);
+        });
+
+        otpForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const code = getOtpValue(otpInputs);
+            const btn = document.getElementById('btn-verify-2fa');
+            
+            if (code.length < 4) {
+                showAlert('Please enter complete code');
+                return;
+            }
+
+            btn.textContent = 'Verifying...';
+            btn.disabled = true;
+            
+            await new Promise(r => setTimeout(r, 800));
+            
+            if (code === '1234') {
+                log('2FA Verified. Logging in...', 'success');
+                btn.textContent = 'Success!';
+                btn.style.background = 'var(--success-color)';
+                
+                const tier = document.getElementById('access-tier').value;
+                const role = tier === 'tier1' ? 'owner' : (tier === 'tier2' ? 'manager' : 'reception');
+                
+                const user = { name: 'Admin', email: loggedInEmail, tier, role };
+                localStorage.setItem('adminToken', 'secure_token_123');
+                localStorage.setItem('adminUser', JSON.stringify(user));
+                
+                setTimeout(() => {
+                    window.location.href = 'MedhikaArts_complete_module.html';
+                }, 600);
+            } else {
+                showAlert('Invalid code. Use 1234');
+                log('2FA Failed: Invalid Code', 'error');
+                clearOtp(otpInputs);
+                otpInputs[0].focus();
+                btn.textContent = 'Verify Code';
+                btn.disabled = false;
+            }
+        });
+
+        forgotForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('forgot-email').value;
+            const btn = document.getElementById('btn-send-forgot');
+            
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            log(`Requesting reset for ${email}`, 'info');
+
+            await new Promise(r => setTimeout(r, 1000));
+            
+            log('Reset code sent.', 'success');
+            log('DEBUG: Recovery code is 9999', 'warn');
+            
+            btn.textContent = 'Send Reset Code';
+            btn.disabled = false;
+            goToStep(3);
+            setTimeout(() => recoveryOtpInputs[0].focus(), 300);
+        });
+
+        resetForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const code = getOtpValue(recoveryOtpInputs);
+            const pwd1 = document.getElementById('new-password').value;
+            const pwd2 = document.getElementById('confirm-password').value;
+            const btn = document.getElementById('btn-submit-reset');
+
+            if (code.length < 4) return showAlert('Enter full recovery code');
+            if (pwd1 !== pwd2) return showAlert('Passwords do not match');
+
+            btn.textContent = 'Resetting...';
+            btn.disabled = true;
+
+            await new Promise(r => setTimeout(r, 800));
+
+            if (code === '9999') {
+                log('Password reset successfully.', 'success');
+                showAlert('Password updated successfully! Please login.', false);
+                resetForm.reset();
+                clearOtp(recoveryOtpInputs);
+                setTimeout(() => {
+                    goToStep(0);
+                    btn.textContent = 'Reset Password';
+                    btn.disabled = false;
+                }, 1500);
+            } else {
+                showAlert('Invalid recovery code. Use 9999');
+                clearOtp(recoveryOtpInputs);
+                recoveryOtpInputs[0].focus();
+                btn.textContent = 'Reset Password';
+                btn.disabled = false;
+            }
+        });
+
+        // Navigation Bindings
+        btnGotoForgot.addEventListener('click', (e) => { e.preventDefault(); goToStep(2); });
+        btnBackFrom2fa.addEventListener('click', () => goToStep(0));
+        btnBackFromForgot.addEventListener('click', () => goToStep(0));
+        btnBackFromReset.addEventListener('click', () => goToStep(0));
+
+        // Auto-login check
+        if (localStorage.getItem('adminToken') && localStorage.getItem('adminUser')) {
+            log('Active session found. Redirecting...', 'success');
+            window.location.href = 'MedhikaArts_complete_module.html';
+        }
+
+    </script>
+</body>
+</html>
