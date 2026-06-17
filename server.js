@@ -1484,6 +1484,45 @@ app.post('/api/admin/seed-mongo', async (req, res) => {
     }
 });
 
+// --- Marketing Requests API ---
+app.get('/api/marketing', async (req, res) => {
+    let data = localDb.marketingRequests || [];
+    res.json(data);
+});
+
+app.post('/api/marketing', async (req, res) => {
+    const data = req.body;
+    data.status = data.status || 'Pending';
+    if (!localDb.marketingRequests) localDb.marketingRequests = [];
+    localDb.marketingRequests.push(data);
+    saveLocal();
+    res.json(data);
+});
+
+app.put('/api/marketing/:id/approve', async (req, res) => {
+    const { id } = req.params;
+    if (!localDb.marketingRequests) localDb.marketingRequests = [];
+    const idx = localDb.marketingRequests.findIndex(r => String(r.id) === String(id));
+    if (idx !== -1) {
+        localDb.marketingRequests[idx].status = 'Approved';
+        saveLocal();
+        return res.json(localDb.marketingRequests[idx]);
+    }
+    res.status(404).json({ error: 'Marketing request not found' });
+});
+
+app.put('/api/marketing/:id/deny', async (req, res) => {
+    const { id } = req.params;
+    if (!localDb.marketingRequests) localDb.marketingRequests = [];
+    const idx = localDb.marketingRequests.findIndex(r => String(r.id) === String(id));
+    if (idx !== -1) {
+        localDb.marketingRequests[idx].status = 'Denied';
+        saveLocal();
+        return res.json(localDb.marketingRequests[idx]);
+    }
+    res.status(404).json({ error: 'Marketing request not found' });
+});
+
 // --- Generate Branch Credentials ---
 app.post('/api/admin/generate-branch-credentials', async (req, res) => {
     const { branchName, accessKey, passcode } = req.body;

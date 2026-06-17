@@ -7353,6 +7353,42 @@
       "joinedDate": "2026-05-17T18:30:00.000Z",
       "av": "av-t",
       "branchId": "b1"
+    },
+    {
+      "id": "c815",
+      "name": "Tiwari",
+      "phone": "9052211668",
+      "location": "",
+      "email": "",
+      "pts": 0,
+      "ltv": "₹250",
+      "joinedDate": "2026-06-09T18:30:00.000Z",
+      "av": "av-k",
+      "branchId": "b1"
+    },
+    {
+      "id": "c816",
+      "name": "0mkar",
+      "phone": "9573555722",
+      "location": "uppuguda",
+      "email": "",
+      "pts": 0,
+      "ltv": "₹50",
+      "joinedDate": "2026-06-09T18:30:00.000Z",
+      "av": "av-k",
+      "branchId": "b1"
+    },
+    {
+      "id": "c817",
+      "name": "fghj",
+      "phone": "23456789",
+      "location": "bb nagar",
+      "email": "",
+      "pts": 0,
+      "ltv": "₹290",
+      "joinedDate": "2026-06-10T18:30:00.000Z",
+      "av": "av-t",
+      "branchId": "b1"
     }
   ],
   "staff": [
@@ -9609,6 +9645,65 @@
       "deposit": false,
       "createdAt": "2026-05-16T12:19:04.883Z",
       "branchId": "b1"
+    },
+    {
+      "id": "GS-53341",
+      "clientId": "c815",
+      "clientName": "Tiwari",
+      "services": [
+        "svc-1778241632172"
+      ],
+      "staffId": "st2",
+      "date": "2026-06-10",
+      "time": "10:00",
+      "total": 250,
+      "status": "upcoming",
+      "notes": "",
+      "source": "walk-in",
+      "location": "",
+      "deposit": false,
+      "createdAt": "2026-06-09T14:34:27.600Z",
+      "branchId": "b1"
+    },
+    {
+      "id": "GS-63679",
+      "clientId": "c816",
+      "clientName": "0mkar",
+      "services": [
+        "svc-1778241632100"
+      ],
+      "staffId": "st7",
+      "date": "2026-06-10",
+      "time": "09:00",
+      "total": 50,
+      "status": "upcoming",
+      "notes": "",
+      "source": "walk-in",
+      "location": "uppuguda",
+      "deposit": false,
+      "createdAt": "2026-06-09T14:38:44.602Z",
+      "branchId": "b1"
+    },
+    {
+      "id": "GS-78277",
+      "clientId": "c817",
+      "clientName": "fghj",
+      "services": [
+        "svc-1778241632098",
+        "svc-1778241632101",
+        "svc-1778241632119"
+      ],
+      "staffId": "st5",
+      "date": "2026-06-11",
+      "time": "12:00",
+      "total": 290,
+      "status": "upcoming",
+      "notes": "",
+      "source": "walk-in",
+      "location": "bb nagar",
+      "deposit": false,
+      "createdAt": "2026-06-09T14:40:44.256Z",
+      "branchId": "b1"
     }
   ],
   "events": [
@@ -9669,40 +9764,9 @@
       "brandCode": "MD-EDBAB455",
       "pingLatency": "16ms",
       "gpsCoords": "17.3850° N, 78.4867° E",
-      "dbSyncTime": "20:25:54"
-    },
-    {
-      "id": "b1778745632452",
-      "name": "sharan branch",
-      "location": "dilshuknagar",
-      "phone": "7396269877",
-      "verificationStatus": "Approved",
-      "status": "Active",
-      "lastActivity": "14 days ago",
-      "subscription": {
-        "plan": "Premium Growth Plan",
-        "price": "₹4,999/mo",
-        "expiry": "2027-05-24",
-        "status": "Active"
-      },
-      "chainId": "chain-1780153497996",
-      "chainName": "Independent",
-      "staffCount": 0,
-      "servicesCount": 0,
-      "bookingCount": 1,
-      "grossRevenue": 150,
-      "brandCode": "MD-BEEE33C3",
-      "pingLatency": "16ms",
-      "gpsCoords": "17.3685° N, 78.5316° E",
-      "dbSyncTime": "20:26:20"
-    },
-    {
-      "id": "br-g197",
-      "name": "balaji",
-      "location": "hyderabad",
-      "phone": "6300188680",
-      "verificationStatus": "Approved",
-      "status": "Active"
+      "dbSyncTime": "20:25:54",
+      "email": "BR-MAIN-7664",
+      "password": "454650"
     },
     {
       "id": "b-1778933722353",
@@ -9710,38 +9774,9 @@
       "location": "hyderabad",
       "phone": "9515239877",
       "verificationStatus": "Approved",
-      "status": "Active"
-    },
-    {
-      "id": "b-1779811438852",
-      "name": "Test Branch",
-      "location": "City Center",
-      "phone": "1234567890",
-      "chainId": null,
-      "email": "testbranch@medika.com",
-      "password": "branch123",
       "status": "Active",
-      "verificationStatus": "Approved"
-    },
-    {
-      "id": "b-1779881286515",
-      "name": "Glamour Salon",
-      "location": "Delhi",
-      "phone": "9999888877",
-      "chainId": null,
-      "email": "glamour@gmail.com",
-      "password": "glamourpassword",
-      "aadhaarNumber": "123456789012",
-      "aadhaarDoc": "",
-      "panNumber": "ABCDE1234F",
-      "panDoc": "",
-      "addressProofType": "Electricity Bill",
-      "addressProofDoc": "",
-      "verificationStatus": "Approved",
-      "status": "Active",
-      "verificationNotes": "approved",
-      "verifiedAt": "2026-05-27T13:40:37.929Z",
-      "verifiedBy": "admin@medika.com"
+      "email": "BR-SRIY-6788",
+      "password": "972518"
     },
     {
       "id": "b-1779882878725",
@@ -9764,24 +9799,53 @@
       "verifiedBy": "admin@medika.com"
     },
     {
-      "id": "b-1779884330492",
-      "name": "Glamour East",
-      "location": "East Delhi",
-      "phone": "9876543210",
-      "chainId": null,
-      "email": "glamoureast@gmail.com",
-      "password": "password",
-      "aadhaarNumber": "121212121212",
-      "aadhaarDoc": "",
-      "panNumber": "PANEA1234E",
-      "panDoc": "",
-      "addressProofType": "GST Certificate",
-      "addressProofDoc": "",
+      "id": "b1781463343846",
+      "name": "boom salon",
+      "ownerName": "jhetalal",
+      "phone": "6300188680",
+      "location": "dilshuknagr hyderabad",
       "verificationStatus": "Approved",
+      "aadhaarDoc": "Hanuman __ bajarangi Desktop Hd Image Download.jpeg",
+      "panDoc": "Hanuman __ bajarangi Desktop Hd Image Download.jpeg",
+      "addressProofDoc": "Hanuman __ bajarangi Desktop Hd Image Download.jpeg",
+      "date": "2026-06-14T18:55:43.846Z",
       "status": "Active",
-      "verificationNotes": "Documents approved.",
-      "verifiedAt": "2026-05-27T12:20:04.305Z",
-      "verifiedBy": "admin@medika.com"
+      "email": "BR-BOOM-4534",
+      "password": "483762",
+      "verificationNotes": "System Approved",
+      "type": "Unisex Salon"
+    },
+    {
+      "id": "b1781492993609",
+      "name": "kutty's  revamp",
+      "ownerName": "kutty",
+      "phone": "8309578708",
+      "location": "kothapet",
+      "verificationStatus": "Approved",
+      "aadhaarDoc": "WhatsApp Image 2026-03-26 at 2.59.41 PM.jpeg",
+      "panDoc": "WhatsApp Image 2026-03-26 at 2.59.41 PM.jpeg",
+      "addressProofDoc": "WhatsApp Image 2026-03-26 at 2.59.41 PM.jpeg",
+      "date": "2026-06-15T03:09:53.609Z",
+      "status": "Active",
+      "verificationNotes": "System Approved",
+      "type": "Beauty Clinic",
+      "email": "BR-KUTT-2870",
+      "password": "697202"
+    },
+    {
+      "id": "b1781633547630",
+      "name": "shiner barbers",
+      "ownerName": "sunny",
+      "phone": "6300188680",
+      "location": "karmanghat",
+      "verificationStatus": "Approved",
+      "aadhaarDoc": "WhatsApp Image 2026-03-26 at 2.59.41 PM (1).jpeg",
+      "panDoc": "WhatsApp Image 2026-03-26 at 2.59.41 PM (1).jpeg",
+      "addressProofDoc": "WhatsApp Image 2026-03-26 at 2.59.41 PM (1).jpeg",
+      "date": "2026-06-16T18:12:27.630Z",
+      "status": "Active",
+      "verificationNotes": "System Approved",
+      "type": "Mens Salon"
     }
   ],
   "admins": [

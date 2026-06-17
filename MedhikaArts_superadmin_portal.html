@@ -83,9 +83,10 @@
             flex-direction: column;
             gap: 2rem;
             border-right: 1px solid var(--glass-border);
-            background: rgba(255, 255, 255, 0.6);
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
             z-index: 10;
+            transition: all 0.3s ease;
         }
 
         .brand {
@@ -180,7 +181,7 @@
         }
 
         .sync-btn {
-            background: white;
+            background: var(--glass-bg);
             color: var(--text-main);
             border: 1px solid var(--glass-border);
             padding: 0.8rem 1.2rem;
@@ -484,6 +485,18 @@
             border: 1px solid rgba(255, 0, 122, 0.2);
         }
 
+        .status-active {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
         /* Modal and Toast Utilities */
         #toast-container {
             position: fixed;
@@ -546,7 +559,7 @@
         }
 
         .modal-content {
-            background: #ffffff;
+            background: var(--bg-dark);
             border: 1px solid var(--border-glow);
             padding: 2.5rem;
             border-radius: 20px;
@@ -572,8 +585,8 @@
             border: none;
             transition: all 0.2s;
         }
-        .btn-cancel { background: #e2e8f0; color: var(--text-main); }
-        .btn-cancel:hover { background: #cbd5e1; }
+        .btn-cancel { background: var(--bg-panel); color: var(--text-main); border: 1px solid var(--glass-border); }
+        .btn-cancel:hover { background: var(--glass-bg); }
         .btn-confirm-suspend { background: #ff007a; color: white; }
         .btn-confirm-suspend:hover { box-shadow: 0 0 15px rgba(255,0,122,0.4); }
 
@@ -702,33 +715,33 @@
                 <i class="fa-solid fa-border-all"></i>
                 Overview
             </a>
-            <a href="#" class="nav-item" data-target="salons">
-                <i class="fa-solid fa-store"></i>
-                Salons & Vendors
+            <a href="#" class="nav-item" data-target="marketing">
+                <i class="fa-solid fa-bullhorn"></i>
+                Onboarding
             </a>
             <a href="#" class="nav-item" data-target="verification">
                 <i class="fa-solid fa-id-card-clip"></i>
                 Verification & KYC
             </a>
-            <a href="#" class="nav-item" data-target="users">
-                <i class="fa-solid fa-users"></i>
-                User Network
-            </a>
-            <a href="#" class="nav-item" data-target="revenue">
-                <i class="fa-solid fa-wallet"></i>
-                Revenue
+            <a href="#" class="nav-item" data-target="salons">
+                <i class="fa-solid fa-store"></i>
+                Salons & Vendors
             </a>
             <a href="#" class="nav-item" data-target="transactions">
                 <i class="fa-solid fa-file-invoice-dollar"></i>
                 Transactions
             </a>
+            <a href="#" class="nav-item" data-target="revenue">
+                <i class="fa-solid fa-wallet"></i>
+                Revenue
+            </a>
             <a href="#" class="nav-item" data-target="manual-record">
                 <i class="fa-solid fa-pen-to-square"></i>
                 Manual Record
             </a>
-            <a href="#" class="nav-item" data-target="branch-access">
-                <i class="fa-solid fa-key"></i>
-                Branch Access
+            <a href="#" class="nav-item" data-target="users">
+                <i class="fa-solid fa-users"></i>
+                User Network
             </a>
             <a href="#" class="nav-item" data-target="settings">
                 <i class="fa-solid fa-gear"></i>
@@ -744,7 +757,7 @@
             </div>
         </div>
         
-        <button class="btn-signout" onclick="signOut()">
+        <button type="button" class="btn-signout" onclick="signOut()">
             <i class="fa-solid fa-right-from-bracket"></i> Sign Out
         </button>
     </nav>
@@ -758,7 +771,7 @@
             </div>
             
             <div class="header-actions">
-                <button class="sync-btn" id="sync-btn">
+                <button type="button" class="sync-btn" id="sync-btn">
                     <i class="fa-solid fa-rotate"></i> Sync Data
                 </button>
                 <div class="theme-switch-wrapper">
@@ -878,13 +891,14 @@
                         <i class="fa-solid fa-store"></i>
                         Recent Vendor Onboarding
                     </div>
-                    <button style="background: transparent; border: 1px solid var(--accent-secondary); color: var(--accent-secondary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">View All</button>
+                    <button type="button" style="background: transparent; border: 1px solid var(--accent-secondary); color: var(--accent-secondary); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">View All</button>
                 </div>
 
                 <table class="vendor-table">
                     <thead>
                         <tr>
                             <th>Salon Name</th>
+                            <th>Shop Type</th>
                             <th>Location</th>
                             <th>Subscription Plan</th>
                             <th>Revenue Generated</th>
@@ -916,12 +930,13 @@
                     <h3 style="margin-bottom: 1rem;">Active Vendor Network</h3>
                     <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
                         <input type="text" placeholder="Search by salon name or ID..." style="flex: 1; padding: 0.8rem 1rem; border-radius: 10px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none;">
-                        <button class="sync-btn"><i class="fa-solid fa-filter"></i> Filter</button>
+                        <button type="button" class="sync-btn"><i class="fa-solid fa-filter"></i> Filter</button>
                     </div>
                     <table class="vendor-table">
                         <thead>
                             <tr>
                                 <th>Salon Name</th>
+                                <th>Shop Type</th>
                                 <th>Location</th>
                                 <th>Subscription Plan</th>
                                 <th>Status</th>
@@ -941,8 +956,71 @@
                 <h2>Salon Verification & KYC</h2>
                 <p style="color: var(--text-muted); margin-top: 1rem; margin-bottom: 2rem;">Review newly registered salons, verify their owner identity (Aadhaar, PAN), and approve their listing on MedhikaArts.</p>
                 
+                <h3 style="margin-bottom: 1rem; color: var(--accent-primary);">Pending Salon Approvals</h3>
                 <div id="verification-queue" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem;">
                     <!-- Populated by JS -->
+                </div>
+
+
+            </div>
+        </div>
+
+        <div id="section-marketing" class="content-section" style="display: none;">
+            <div class="glass-panel" style="padding: 2rem;">
+                <h2>Onboarding</h2>
+                <p style="color: var(--text-muted); margin-top: 1rem; margin-bottom: 2rem;">Register newly acquired salons. Applications will be sent directly to the Verification & KYC queue for document validation and approval.</p>
+                
+                <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 12px; border: 1px solid var(--glass-border); max-width: 800px;">
+                    <h3 style="margin-bottom: 1.5rem;">New Salon Onboarding Application</h3>
+                    <form onsubmit="event.preventDefault(); submitSalonApplication();" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div>
+                            <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Salon / Brand Name *</label>
+                            <input type="text" id="marketing-salon-name" placeholder="e.g. Glamour Lounge" required style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none; color: var(--text-main);">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Owner Name *</label>
+                            <input type="text" id="marketing-owner-name" placeholder="e.g. Rahul Sharma" required style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none; color: var(--text-main);">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Contact Phone *</label>
+                            <input type="tel" id="marketing-phone" placeholder="e.g. 9876543210" required style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none; color: var(--text-main);">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Location / City *</label>
+                            <input type="text" id="marketing-location" placeholder="e.g. Jubilee Hills, Hyderabad" required style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none; color: var(--text-main);">
+                        </div>
+                        <div style="grid-column: span 2;">
+                            <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Subscription Type *</label>
+                            <select id="marketing-subscription" required style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none; color: var(--text-main);">
+                                <option value="Basic">Basic</option>
+                                <option value="Premium">Premium</option>
+                                <option value="Deluxe">Deluxe</option>
+                            </select>
+                        </div>
+                        
+                        <div style="grid-column: span 2;">
+                            <h4 style="margin-top: 1rem; margin-bottom: 1rem; color: var(--accent-primary);">Document Proofs (KYC)</h4>
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Owner Aadhaar Card</label>
+                            <input type="file" id="marketing-doc-aadhaar" accept=".pdf,image/*" style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px dashed var(--accent-secondary); background: rgba(0,0,0,0.2); color: var(--text-main);">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Owner PAN Card</label>
+                            <input type="file" id="marketing-doc-pan" accept=".pdf,image/*" style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px dashed var(--accent-secondary); background: rgba(0,0,0,0.2); color: var(--text-main);">
+                        </div>
+                        <div style="grid-column: span 2;">
+                            <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Salon License / Electricity Bill</label>
+                            <input type="file" id="marketing-doc-license" accept=".pdf,image/*" style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px dashed var(--accent-secondary); background: rgba(0,0,0,0.2); color: var(--text-main);">
+                        </div>
+
+                        <div style="grid-column: span 2; margin-top: 1.5rem;">
+                            <button type="submit" class="ai-assistant-btn" style="width: 100%; justify-content: center;">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> Submit Application to KYC Queue
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -990,7 +1068,7 @@
                         <div style="padding: 2rem; background: rgba(245, 158, 11, 0.1); border-radius: 15px; border: 1px solid rgba(245, 158, 11, 0.3);">
                             <h3 style="color: #b45309; margin-bottom: 1rem;">Pending Payouts</h3>
                             <h1 style="font-size: 3rem; color: #f59e0b;">₹12,50,000</h1>
-                            <button class="sync-btn" style="margin-top: 1rem; background: #f59e0b; color: white; border: none;">Process Payouts</button>
+                            <button type="button" class="sync-btn" style="margin-top: 1rem; background: #f59e0b; color: white; border: none;">Process Payouts</button>
                         </div>
 
                         <div>
@@ -1026,8 +1104,8 @@
                 <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
                     <input type="text" placeholder="Search by Txn ID, Salon, or Service..." style="flex: 1; padding: 0.8rem 1rem; border-radius: 10px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none;">
                     <input type="date" style="padding: 0.8rem; border-radius: 10px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none;">
-                    <button class="sync-btn"><i class="fa-solid fa-filter"></i> Filter</button>
-                    <button class="ai-assistant-btn"><i class="fa-solid fa-download"></i> Export CSV</button>
+                    <button type="button" class="sync-btn"><i class="fa-solid fa-filter"></i> Filter</button>
+                    <button type="button" class="ai-assistant-btn"><i class="fa-solid fa-download"></i> Export CSV</button>
                 </div>
 
                 <div style="background: rgba(255,255,255,0.6); border-radius: 12px; border: 1px solid var(--glass-border); overflow-x: auto;">
@@ -1051,83 +1129,7 @@
             </div>
         </div>
 
-        <div id="section-branch-access" class="content-section" style="display: none;">
-            <div class="glass-panel" style="padding: 2rem;">
-                <h2>Branch Access Control</h2>
-                <p style="color: var(--text-muted); margin-top: 1rem; margin-bottom: 2rem;">Generate secure access keys and passcodes for branches to login.</p>
-                
-                <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 300px; background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 12px; border: 1px solid var(--glass-border);">
-                        <h3 style="margin-bottom: 1.5rem;">Generate New Access</h3>
-                        <div style="display: flex; flex-direction: column; gap: 1rem;">
-                            <div>
-                                <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Select Branch</label>
-                                <select id="branch-select" style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none; color: var(--text-main);">
-                                    <option value="Glamour Lounge">Glamour Lounge</option>
-                                    <option value="Style Studio">Style Studio</option>
-                                    <option value="Luxe Beauty Bar">Luxe Beauty Bar</option>
-                                    <option value="Urban X Spa">Urban X Spa</option>
-                                </select>
-                            </div>
-                            <button class="ai-assistant-btn" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="generateBranchKey()">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Credentials
-                            </button>
-                        </div>
-                        
-                        <div id="generated-credentials" style="margin-top: 2rem; padding: 1.5rem; background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.3); border-radius: 8px; display: none;">
-                            <h4 style="color: #00ff88; margin-bottom: 1rem;">Credentials Generated!</h4>
-                            <div style="margin-bottom: 0.8rem;">
-                                <p style="font-size: 0.8rem; color: var(--text-muted);">Access Key</p>
-                                <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.2); padding: 0.5rem; border-radius: 6px;">
-                                    <strong id="new-access-key" style="font-family: monospace; letter-spacing: 1px; color: var(--text-main);"></strong>
-                                    <i class="fa-regular fa-copy" style="cursor: pointer; color: var(--accent-secondary);" onclick="showToast('Access Key copied!')"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <p style="font-size: 0.8rem; color: var(--text-muted);">Passcode</p>
-                                <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.2); padding: 0.5rem; border-radius: 6px;">
-                                    <strong id="new-passcode" style="font-family: monospace; letter-spacing: 2px; color: var(--text-main);"></strong>
-                                    <i class="fa-regular fa-copy" style="cursor: pointer; color: var(--accent-secondary);" onclick="showToast('Passcode copied!')"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="flex: 2; min-width: 400px;">
-                        <h3 style="margin-bottom: 1.5rem;">Active Branch Credentials</h3>
-                        <div style="background: rgba(255,255,255,0.6); border-radius: 12px; border: 1px solid var(--glass-border); overflow-x: auto;">
-                            <table class="vendor-table" style="margin-top: 0;">
-                                <thead>
-                                    <tr>
-                                        <th>Branch</th>
-                                        <th>Access Key</th>
-                                        <th>Passcode</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="branch-keys-body">
-                                    <tr>
-                                        <td><strong>Glamour Lounge</strong></td>
-                                        <td style="font-family: monospace;">BR-GLAM-8291</td>
-                                        <td style="font-family: monospace;">****</td>
-                                        <td><span class="status-badge status-active" style="background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.3);">Active</span></td>
-                                        <td><button class="action-btn btn-suspend" onclick="this.closest('tr').remove(); showToast('Credentials Revoked', 'error')">Revoke</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Style Studio</strong></td>
-                                        <td style="font-family: monospace;">BR-STYL-4421</td>
-                                        <td style="font-family: monospace;">****</td>
-                                        <td><span class="status-badge status-active" style="background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.3);">Active</span></td>
-                                        <td><button class="action-btn btn-suspend" onclick="this.closest('tr').remove(); showToast('Credentials Revoked', 'error')">Revoke</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <div id="section-manual-record" class="content-section" style="display: none;">
             <div class="glass-panel" style="padding: 2rem;">
@@ -1163,7 +1165,7 @@
                                 <label style="display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Date of Transaction</label>
                                 <input type="date" id="manual-txn-date" style="width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none; color: var(--text-main);">
                             </div>
-                            <button class="ai-assistant-btn" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="submitManualRecord()">
+                            <button type="button" class="ai-assistant-btn" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="submitManualRecord()">
                                 <i class="fa-solid fa-plus"></i> Add Record
                             </button>
                         </div>
@@ -1241,7 +1243,7 @@
                             </label>
                         </div>
                     </div>
-                    <button class="ai-assistant-btn" id="btn-save-settings" style="width: fit-content; margin-top: 1rem;" onclick="saveSystemSettings()">
+                    <button type="button" class="ai-assistant-btn" id="btn-save-settings" style="width: fit-content; margin-top: 1rem;" onclick="saveSystemSettings()">
                         <i class="fa-solid fa-floppy-disk"></i> Save Configuration
                     </button>
                 </div>
@@ -1258,8 +1260,8 @@
             <h3><i class="fa-solid fa-triangle-exclamation" style="color:#ff007a; margin-right:10px;"></i>Suspend License?</h3>
             <p>Are you sure you want to suspend the license for <strong id="modal-salon-name"></strong>? They will immediately lose access to the MedhikaArts platform.</p>
             <div class="modal-actions">
-                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-                <button class="btn-confirm-suspend" onclick="confirmSuspend()">Yes, Suspend</button>
+                <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+                <button type="button" class="btn-confirm-suspend" onclick="confirmSuspend()">Yes, Suspend</button>
             </div>
         </div>
     </div>
@@ -1269,7 +1271,7 @@
         <div class="modal-content" style="max-width: 600px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                 <h3 id="kyc-modal-title"><i class="fa-regular fa-id-card" style="color:var(--accent-primary); margin-right:10px;"></i> Document Viewer</h3>
-                <button onclick="closeKycModal()" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text-muted);">&times;</button>
+                <button type="button" onclick="closeKycModal()" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text-muted);">&times;</button>
             </div>
             
             <div style="background: rgba(26,107,138,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px dashed var(--accent-secondary);">
@@ -1298,7 +1300,7 @@
             </div>
 
             <div class="modal-actions" style="justify-content: flex-end;">
-                <button class="btn-cancel" onclick="closeKycModal()">Close Viewer</button>
+                <button type="button" class="btn-cancel" onclick="closeKycModal()">Close Viewer</button>
             </div>
         </div>
     </div>
@@ -1396,10 +1398,15 @@
 
         // --- Application Logic --- //
         
+        const token = localStorage.getItem('adminToken');
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+        
         let vendors = [
-            { id: 1, name: 'Glamour Lounge', joined: '2 days ago', initials: 'GL', location: 'Mumbai, West', plan: 'Premium (Yearly)', revenue: '₹45,000', status: 'Active' },
-            { id: 2, name: 'Style Studio', joined: '5 days ago', initials: 'SS', location: 'Delhi, South', plan: 'Basic (Monthly)', revenue: '₹12,500', status: 'Active' },
-            { id: 3, name: 'Urban X Spa', joined: 'Today', initials: 'UX', location: 'Bangalore, CBD', plan: 'Premium (Yearly)', revenue: '-', status: 'Pending Review' }
+            { id: 1, name: 'Glamour Lounge', joined: '2 days ago', initials: 'GL', location: 'Mumbai, West', plan: 'Premium (Yearly)', revenue: '₹45,000', status: 'Active', type: 'Premium Unisex Salon' },
+            { id: 2, name: 'Style Studio', joined: '5 days ago', initials: 'SS', location: 'Delhi, South', plan: 'Basic (Monthly)', revenue: '₹12,500', status: 'Active', type: 'Hair Studio' },
+            { id: 3, name: 'Urban X Spa', joined: 'Today', initials: 'UX', location: 'Bangalore, CBD', plan: 'Premium (Yearly)', revenue: '-', status: 'Pending Review', type: 'Spa & Wellness Center' }
         ];
 
         let salonToSuspend = null;
@@ -1415,9 +1422,9 @@
 
                 let actionButton = '';
                 if (vendor.status === 'Suspended') {
-                    actionButton = `<button class="action-btn btn-reactivate" onclick="reactivateLicense(${vendor.id})"><i class="fa-solid fa-play"></i> Reactivate</button>`;
+                    actionButton = `<button type="button" type="button" class="action-btn btn-reactivate" onclick="reactivateLicense('${vendor.id}')"><i class="fa-solid fa-play"></i> Reactivate</button>`;
                 } else {
-                    actionButton = `<button class="action-btn btn-suspend" onclick="requestSuspend(${vendor.id})"><i class="fa-solid fa-ban"></i> Suspend</button>`;
+                    actionButton = `<button type="button" type="button" class="action-btn btn-suspend" onclick="requestSuspend('${vendor.id}')"><i class="fa-solid fa-ban"></i> Suspend</button>`;
                 }
 
                 tbody.innerHTML += `
@@ -1431,11 +1438,21 @@
                                 </div>
                             </div>
                         </td>
+                        <td><span style="font-size: 0.85rem; color: var(--accent-secondary); border: 1px solid var(--accent-secondary); padding: 0.2rem 0.5rem; border-radius: 6px;">${vendor.type}</span></td>
                         <td>${vendor.location}</td>
-                        <td>${vendor.plan}</td>
+                        <td>
+                            <select onchange="updateVendorPlan('${vendor.id}', this.value)" style="padding: 0.4rem; border-radius: 6px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none; color: var(--text-main);">
+                                <option value="Basic" ${vendor.plan.includes('Basic') ? 'selected' : ''}>Basic</option>
+                                <option value="Premium" ${vendor.plan.includes('Premium') ? 'selected' : ''}>Premium</option>
+                                <option value="Deluxe" ${vendor.plan.includes('Deluxe') ? 'selected' : ''}>Deluxe</option>
+                            </select>
+                        </td>
                         <td>${vendor.revenue}</td>
                         <td><span class="status-badge ${statusClass}">${vendor.status}</span></td>
-                        <td>${actionButton}</td>
+                        <td style="display: flex; gap: 0.5rem;">
+                            ${actionButton}
+                            <button type="button" class="action-btn" style="background: rgba(229, 62, 62, 0.1); color: #e53e3e; border: 1px solid rgba(229, 62, 62, 0.3);" onclick="deleteVendor('${vendor.id}')"><i class="fa-solid fa-trash"></i></button>
+                        </td>
                     </tr>
                 `;
             });
@@ -1460,7 +1477,7 @@
 
         // Suspend Logic
         function requestSuspend(id) {
-            salonToSuspend = vendors.find(v => v.id === id);
+            salonToSuspend = vendors.find(v => String(v.id) === String(id));
             document.getElementById('modal-salon-name').innerText = salonToSuspend.name;
             document.getElementById('suspend-modal').classList.add('active');
         }
@@ -1470,56 +1487,143 @@
             salonToSuspend = null;
         }
 
-        function confirmSuspend() {
+        async function confirmSuspend() {
             if (salonToSuspend) {
+                try {
+                    const response = await fetch(`http://localhost:5000/api/branches/${salonToSuspend.id}/status`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                        body: JSON.stringify({ status: 'Suspended' })
+                    });
+                    if (response.ok) {
+                        showToast(`${salonToSuspend.name}'s license has been suspended.`, 'error');
+                        fetchRealTimeData();
+                        closeModal();
+                        return;
+                    }
+                } catch(e) {}
+
                 salonToSuspend.status = 'Suspended';
                 renderVendorTable();
-                showToast(`${salonToSuspend.name}'s license has been suspended.`, 'error');
+                showToast(`${salonToSuspend.name}'s license has been suspended (locally).`, 'error');
                 closeModal();
             }
         }
 
-        function reactivateLicense(id) {
-            const vendor = vendors.find(v => v.id === id);
+        async function updateVendorPlan(id, newPlan) {
+            const vendor = vendors.find(v => String(v.id) === String(id));
             if (vendor) {
-                vendor.status = 'Active';
-                renderVendorTable();
-                showToast(`${vendor.name}'s license successfully reactivated.`);
+                vendor.plan = newPlan;
+                
+                const price = newPlan === 'Premium' ? '₹4,999/mo' : (newPlan === 'Deluxe' ? '₹9,999/mo' : '₹1,999/mo');
+                const subscription = {
+                    plan: newPlan,
+                    price: price,
+                    expiry: new Date(Date.now() + 365*24*60*60*1000).toISOString().split('T')[0],
+                    status: 'Active'
+                };
+                
+                try {
+                    const response = await fetch(`http://localhost:5000/api/branches/${id}`, {
+                        method: 'PUT',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}` 
+                        },
+                        body: JSON.stringify({ subscription })
+                    });
+                    
+                    if (response.ok) {
+                        showToast(`${vendor.name}'s subscription updated to ${newPlan} in real-time.`, 'success');
+                        return;
+                    }
+                } catch (e) {
+                    console.log("Backend offline, updating plan locally only.");
+                }
+                showToast(`${vendor.name}'s subscription updated to ${newPlan}.`, 'success');
             }
         }
 
-        function generateBranchKey() {
-            const branch = document.getElementById('branch-select').value;
-            const prefix = branch.substring(0,4).toUpperCase().replace(/\s/g, '');
-            const randomKey = Math.floor(1000 + Math.random() * 9000);
-            const randomPass = Math.floor(100000 + Math.random() * 900000);
+        async function reactivateLicense(id) {
+            const vendor = vendors.find(v => String(v.id) === String(id));
+            if (vendor) {
+                try {
+                    const response = await fetch(`http://localhost:5000/api/branches/${id}/status`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                        body: JSON.stringify({ status: 'Active' })
+                    });
+                    if (response.ok) {
+                        showToast(`${vendor.name}'s license successfully reactivated.`);
+                        fetchRealTimeData();
+                        return;
+                    }
+                } catch(e) {}
+
+                vendor.status = 'Active';
+                renderVendorTable();
+                showToast(`${vendor.name}'s license successfully reactivated (locally).`);
+            }
+        }
+
+        async function generateAndSetCredentials(id) {
+            const vendor = vendors.find(v => String(v.id) === String(id));
+            if(!vendor) return;
+
+            const accessKey = 'BR-' + vendor.name.substring(0,4).toUpperCase().replace(/[^A-Z]/g, '') + '-' + Math.floor(1000 + Math.random() * 9000);
+            const passcode = Math.floor(100000 + Math.random() * 900000).toString();
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/branches/${vendor.id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: accessKey, password: passcode })
+                });
+
+                if(response.ok) {
+                    showToast(`Credentials generated for ${vendor.name}! Access Key: ${accessKey}, Passcode: ${passcode}`, 'success');
+                    
+                    // Alert the user so they can copy it!
+                    setTimeout(() => {
+                        alert(`Successfully generated branch credentials for ${vendor.name}!\n\nAccess Key: ${accessKey}\nPasscode: ${passcode}\n\nMake sure to securely communicate these to the branch manager.`);
+                    }, 500);
+
+                    fetchRealTimeData();
+                } else {
+                    showToast('Failed to save credentials to backend.', 'error');
+                }
+            } catch (e) {
+                console.error(e);
+                showToast('Backend offline. Could not generate credentials.', 'error');
+            }
+        }
+
+        async function viewCredentials(id) {
+            // First try to fetch from backend to get real up-to-date credentials
+            try {
+                const response = await fetch('http://localhost:5000/api/branches', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    const branch = data.find(b => String(b.id) === String(id));
+                    if(branch && branch.email) {
+                        alert(`Active Credentials for ${branch.name}:\n\nAccess Key (Email): ${branch.email}\nPasscode: ${branch.password}`);
+                        return;
+                    }
+                }
+            } catch (e) {
+                console.log("Backend offline, trying local state");
+            }
             
-            const accessKey = `BR-${prefix}-${randomKey}`;
-            const passcode = `${randomPass}`;
-            
-            // Save to backend
-            fetch('http://localhost:5000/api/admin/generate-branch-credentials', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ branchName: branch, accessKey, passcode })
-            }).catch(console.error);
-            
-            document.getElementById('new-access-key').innerText = accessKey;
-            document.getElementById('new-passcode').innerText = passcode;
-            document.getElementById('generated-credentials').style.display = 'block';
-            
-            const tbody = document.getElementById('branch-keys-body');
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td><strong>${branch}</strong></td>
-                <td style="font-family: monospace;">${accessKey}</td>
-                <td style="font-family: monospace;">****</td>
-                <td><span class="status-badge status-active" style="background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.3);">Active</span></td>
-                <td><button class="action-btn btn-suspend" onclick="this.closest('tr').remove(); showToast('Credentials Revoked', 'error')">Revoke</button></td>
-            `;
-            tbody.prepend(row);
-            
-            showToast(`Credentials generated for ${branch}`, 'success');
+            // Fallback to local state if backend fetch fails
+            const vendor = vendors.find(v => String(v.id) === String(id));
+            if(!vendor) return;
+            if(vendor.email) {
+                alert(`Active Credentials for ${vendor.name}:\n\nAccess Key (Email): ${vendor.email}\nPasscode: ${vendor.password}`);
+            } else {
+                alert(`No credentials generated yet for ${vendor.name}. Please click 'Generate Credentials' first.`);
+            }
         }
 
         function submitManualRecord() {
@@ -1600,10 +1704,10 @@
             'salons': { title: 'Salons & Vendors', subtitle: 'Manage active platform vendors and their subscriptions.' },
             'verification': { title: 'Verification & KYC', subtitle: 'Review and approve new salon applications and documents.' },
             'users': { title: 'User Network', subtitle: 'Analyze user behavior, app adoption, and demographics.' },
+            'marketing': { title: 'Onboarding', subtitle: 'Raise and track requests for onboarding new services.' },
             'revenue': { title: 'Revenue & Finances', subtitle: 'Track GMV, platform fees, and pending payouts.' },
             'transactions': { title: 'Transaction Ledger', subtitle: 'Detailed records of all payments, payouts, and platform fees.' },
             'manual-record': { title: 'Manual Business Records', subtitle: 'Log offline payments, direct expenditures, and adjustments.' },
-            'branch-access': { title: 'Branch Access Control', subtitle: 'Generate and manage access keys and passcodes for branch logins.' },
             'settings': { title: 'System Configuration', subtitle: 'Manage core platform settings and integrations.' }
         };
 
@@ -1633,8 +1737,8 @@
 
         // Salon Verification & Extended Rendering
         let pendingSalons = [
-            { id: 101, name: 'Luxe Beauty Bar', location: 'Pune, Central', applied: '2 hours ago', docs: 'Verified ✓' },
-            { id: 102, name: 'Glow Up Studio', location: 'Chennai, East', applied: '1 day ago', docs: 'Pending...' }
+            { id: 101, name: 'Luxe Beauty Bar', location: 'Pune, Central', applied: '2 hours ago', docs: 'Verified ✓', type: 'Beauty Clinic' },
+            { id: 102, name: 'Glow Up Studio', location: 'Chennai, East', applied: '1 day ago', docs: 'Pending...', type: 'Barber Shop' }
         ];
 
         let payments = [
@@ -1662,15 +1766,30 @@
                         <div style="margin-bottom: 1.5rem;">
                             <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">KYC Documents</p>
                             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                                <button class="sync-btn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="openKycModal('Aadhaar Card', '8429-XXXX-4912', 'Owner of ${salon.name}')"><i class="fa-regular fa-id-card"></i> Owner Aadhaar</button>
-                                <button class="sync-btn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="openKycModal('PAN Card', 'BWXPMXXXX1', 'Owner of ${salon.name}')"><i class="fa-solid fa-file-invoice"></i> Owner PAN</button>
-                                <button class="sync-btn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="openKycModal('Business Registration', 'LIC-2026-9921', '${salon.name}')"><i class="fa-solid fa-certificate"></i> Salon License</button>
+                                <button type="button" class="sync-btn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="openKycModal('Aadhaar Card', '8429-XXXX-4912', 'Owner of ${salon.name}')"><i class="fa-regular fa-id-card"></i> Owner Aadhaar</button>
+                                <button type="button" class="sync-btn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="openKycModal('PAN Card', 'BWXPMXXXX1', 'Owner of ${salon.name}')"><i class="fa-solid fa-file-invoice"></i> Owner PAN</button>
+                                <button type="button" class="sync-btn" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;" onclick="openKycModal('Business Registration', 'LIC-2026-9921', '${salon.name}')"><i class="fa-solid fa-certificate"></i> Salon License</button>
                             </div>
                         </div>
 
+                        <div style="margin-bottom: 1rem;">
+                            <label style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Assign Shop Type & Provision Services:</label>
+                            <select id="shop-type-${salon.id}" style="width: 100%; padding: 0.6rem; margin-top: 0.4rem; border-radius: 8px; border: 1px solid var(--glass-border); background: var(--bg-dark); color: var(--text-main); outline: none;">
+                                <option value="Unisex Salon" ${salon.type === 'Unisex Salon' ? 'selected' : ''}>Unisex Salon</option>
+                                <option value="Mens Salon" ${salon.type === 'Mens Salon' ? 'selected' : ''}>Men's Salon</option>
+                                <option value="Premium Unisex Salon" ${salon.type === 'Premium Unisex Salon' ? 'selected' : ''}>Premium Unisex Salon</option>
+                                <option value="Barber Shop" ${salon.type === 'Barber Shop' ? 'selected' : ''}>Barber Shop</option>
+                                <option value="Spa & Wellness Center" ${salon.type === 'Spa & Wellness Center' ? 'selected' : ''}>Spa & Wellness Center</option>
+                                <option value="Beauty Clinic" ${salon.type === 'Beauty Clinic' ? 'selected' : ''}>Beauty Clinic</option>
+                                <option value="Hair Studio" ${salon.type === 'Hair Studio' ? 'selected' : ''}>Hair Studio</option>
+                                <option value="Franchise Outlet" ${salon.type === 'Franchise Outlet' ? 'selected' : ''}>Franchise Outlet</option>
+                                <option value="Home Service Salon" ${salon.type === 'Home Service Salon' ? 'selected' : ''}>Home Service Salon</option>
+                            </select>
+                        </div>
+
                         <div style="display: flex; gap: 1rem;">
-                            <button class="btn-approve" style="flex: 1; padding: 0.8rem;" onclick="approveSalon(${salon.id})"><i class="fa-solid fa-check"></i> Approve Listing</button>
-                            <button class="action-btn btn-suspend" style="flex: 1;" onclick="rejectSalon(${salon.id})">Reject</button>
+                            <button type="button" class="btn-approve" style="flex: 1; padding: 0.8rem;" onclick="approveSalon('${salon.id}')"><i class="fa-solid fa-check"></i> Approve & Provision</button>
+                            <button type="button" class="action-btn btn-suspend" style="flex: 1;" onclick="rejectSalon('${salon.id}')">Reject</button>
                         </div>
                     </div>
                 `;
@@ -1683,16 +1802,28 @@
             vendors.forEach(vendor => {
                 if(vendor.status === 'Pending Review') return; // Hide pending in active list
                 let actionBtn = vendor.status === 'Suspended' ? 
-                    `<button class="action-btn btn-reactivate" onclick="reactivateLicense(${vendor.id})">Reactivate</button>` :
-                    `<button class="action-btn btn-suspend" onclick="requestSuspend(${vendor.id})">Suspend</button>`;
+                    `<button type="button" type="button" class="action-btn btn-reactivate" onclick="reactivateLicense('${vendor.id}')">Reactivate</button>` :
+                    `<button type="button" type="button" class="action-btn btn-suspend" onclick="requestSuspend('${vendor.id}')">Suspend</button>`;
                 
                 fullTbody.innerHTML += `
                     <tr>
                         <td><strong>${vendor.name}</strong></td>
+                        <td><span style="font-size: 0.85rem; color: var(--accent-secondary); border: 1px solid var(--accent-secondary); padding: 0.2rem 0.5rem; border-radius: 6px;">${vendor.type}</span></td>
                         <td>${vendor.location}</td>
-                        <td>${vendor.plan}</td>
+                        <td>
+                            <select onchange="updateVendorPlan('${vendor.id}', this.value)" style="padding: 0.4rem; border-radius: 6px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.5); outline: none; color: var(--text-main);">
+                                <option value="Basic" ${vendor.plan.includes('Basic') ? 'selected' : ''}>Basic</option>
+                                <option value="Premium" ${vendor.plan.includes('Premium') ? 'selected' : ''}>Premium</option>
+                                <option value="Deluxe" ${vendor.plan.includes('Deluxe') ? 'selected' : ''}>Deluxe</option>
+                            </select>
+                        </td>
                         <td><span class="status-badge ${vendor.status === 'Suspended' ? 'status-suspended' : 'status-active'}">${vendor.status}</span></td>
-                        <td>${actionBtn}</td>
+                        <td style="display: flex; gap: 0.5rem;">
+                            ${actionBtn}
+                            <button type="button" class="action-btn" style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);" onclick="viewCredentials('${vendor.id}')" title="View Branch Credentials"><i class="fa-solid fa-eye"></i> View Credentials</button>
+                            <button type="button" class="action-btn" style="background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid rgba(0, 255, 136, 0.3);" onclick="generateAndSetCredentials('${vendor.id}')" title="Generate New Branch Credentials"><i class="fa-solid fa-key"></i> Generate Credentials</button>
+                            <button type="button" class="action-btn" style="background: rgba(229, 62, 62, 0.1); color: #e53e3e; border: 1px solid rgba(229, 62, 62, 0.3);" onclick="deleteVendor('${vendor.id}')"><i class="fa-solid fa-trash"></i></button>
+                        </td>
                     </tr>
                 `;
             });
@@ -1748,32 +1879,215 @@
             }
         }
 
-        function approveSalon(id) {
-            const salonIndex = pendingSalons.findIndex(s => s.id === id);
-            if(salonIndex > -1) {
-                const salon = pendingSalons[salonIndex];
-                pendingSalons.splice(salonIndex, 1);
-                
-                // Add to active vendors
-                vendors.push({
-                    id: salon.id, name: salon.name, joined: 'Just now', initials: salon.name.substring(0,2).toUpperCase(),
-                    location: salon.location, plan: 'Basic (Monthly)', revenue: '₹0', status: 'Active'
+        async function fetchRealTimeData() {
+            try {
+                const response = await fetch('http://localhost:5000/api/branches', {
+                    headers: { 'Authorization': `Bearer ${token}` }
                 });
-
-                showToast(`${salon.name} has been verified and onboarded!`, 'success');
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    vendors = [];
+                    pendingSalons = [];
+                    
+                    data.forEach(branch => {
+                        if (branch.verificationStatus === 'Approved') {
+                            vendors.push({
+                                id: branch.id, name: branch.name, joined: 'Recently', initials: branch.name.substring(0,2).toUpperCase(),
+                                location: branch.location || 'N/A',
+                                plan: (branch.subscription && branch.subscription.plan) ? branch.subscription.plan : 'Basic',
+                                revenue: '₹' + (branch.grossRevenue || 0),
+                                status: branch.status,
+                                type: branch.type || 'Unisex Salon',
+                                email: branch.email || '',
+                                password: branch.password || ''
+                            });
+                        } else if (branch.verificationStatus === 'Pending') {
+                            pendingSalons.push({
+                                id: branch.id, name: branch.name, location: branch.location || 'N/A', applied: 'Recently', docs: 'Pending...', type: branch.type || 'Unisex Salon',
+                                subscription: branch.subscription || null
+                            });
+                        }
+                    });
+                    
+                    renderVendorTable();
+                    renderExtendedTables();
+                } else {
+                    renderVendorTable();
+                    renderExtendedTables();
+                }
+            } catch (error) {
+                console.log("Using local mock data (backend not available).");
                 renderVendorTable();
                 renderExtendedTables();
             }
+            
+            try {
+                const mkRes = await fetch('http://localhost:5000/api/marketing');
+                if (mkRes.ok) {
+                    marketingRequests = await mkRes.json();
+                }
+            } catch(e) {}
         }
 
-        function rejectSalon(id) {
-            const salonIndex = pendingSalons.findIndex(s => s.id === id);
+        async function approveSalon(id) {
+            const typeSelect = document.getElementById(`shop-type-${id}`);
+            const selectedType = typeSelect ? typeSelect.value : 'Unisex Salon';
+
+            // Optimistic update for immediate feedback
+            const salonIndex = pendingSalons.findIndex(s => String(s.id) === String(id));
+            let salon = null;
+            if(salonIndex > -1) {
+                salon = pendingSalons[salonIndex];
+                pendingSalons.splice(salonIndex, 1);
+                
+                const planName = (salon.subscription && salon.subscription.plan) ? salon.subscription.plan : 'Basic';
+                vendors.push({
+                    id: salon.id, name: salon.name, joined: 'Just now', initials: (salon.name || 'NA').substring(0,2).toUpperCase(),
+                    location: salon.location, plan: planName, revenue: '₹0', status: 'Active', type: selectedType
+                });
+                renderVendorTable();
+                renderExtendedTables();
+            }
+
+            try {
+                const planName = (salon && salon.subscription && salon.subscription.plan) ? salon.subscription.plan : 'Basic';
+                const price = planName === 'Premium' ? '₹4,999/mo' : (planName === 'Deluxe' ? '₹9,999/mo' : '₹1,999/mo');
+                const subscription = {
+                    plan: planName,
+                    price: price,
+                    expiry: new Date(Date.now() + 365*24*60*60*1000).toISOString().split('T')[0],
+                    status: 'Active'
+                };
+
+                const response = await fetch(`http://localhost:5000/api/branches/${id}`, {
+                    method: 'PUT',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` 
+                    },
+                    body: JSON.stringify({ 
+                        verificationStatus: 'Approved', 
+                        status: 'Active', 
+                        verificationNotes: 'System Approved', 
+                        type: selectedType,
+                        subscription
+                    })
+                });
+
+                if (response.ok) {
+                    showToast(`Provisioning services for ${selectedType}...`, 'success');
+                    setTimeout(() => {
+                        showToast(`Salon has been verified and onboarded!`, 'success');
+                        fetchRealTimeData();
+                    }, 1000);
+                    return;
+                }
+            } catch (e) {
+                console.log("Backend offline, falling back to mock logic.");
+            }
+
+            if(salon) {
+                showToast(`Provisioning services for ${selectedType}...`, 'success');
+                setTimeout(() => {
+                    showToast(`${salon.name} has been verified and onboarded (locally)!`, 'success');
+                }, 1000);
+            }
+        }
+
+        async function rejectSalon(id) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/branches/${id}/verify`, {
+                    method: 'PUT',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` 
+                    },
+                    body: JSON.stringify({ verificationStatus: 'Rejected' })
+                });
+
+                if (response.ok) {
+                    showToast(`Application has been rejected.`, 'error');
+                    fetchRealTimeData();
+                    return;
+                }
+            } catch (e) {
+                console.log("Backend offline, falling back to mock logic.");
+            }
+
+            const salonIndex = pendingSalons.findIndex(s => String(s.id) === String(id));
             if(salonIndex > -1) {
                 const salon = pendingSalons[salonIndex];
                 pendingSalons.splice(salonIndex, 1);
                 showToast(`${salon.name}'s application has been rejected.`, 'error');
                 renderExtendedTables();
             }
+        }
+
+        async function submitSalonApplication() {
+            const name = document.getElementById('marketing-salon-name').value;
+            const owner = document.getElementById('marketing-owner-name').value;
+            const phone = document.getElementById('marketing-phone').value;
+            const location = document.getElementById('marketing-location').value;
+
+            const aadhaar = document.getElementById('marketing-doc-aadhaar').files[0];
+            const pan = document.getElementById('marketing-doc-pan').files[0];
+            const license = document.getElementById('marketing-doc-license').files[0];
+
+            if(!name || !owner || !phone || !location) {
+                showToast('Please fill all required fields.', 'error');
+                return;
+            }
+
+            const subscriptionPlan = document.getElementById('marketing-subscription').value;
+            const reqPayload = {
+                id: 'b' + Date.now(),
+                name: name,
+                ownerName: owner,
+                phone: phone,
+                location: location,
+                verificationStatus: 'Pending',
+                // Mock document uploads
+                aadhaarDoc: aadhaar ? aadhaar.name : 'aadhaar_mock.pdf',
+                panDoc: pan ? pan.name : 'pan_mock.pdf',
+                addressProofDoc: license ? license.name : 'license_mock.pdf',
+                date: new Date().toISOString(),
+                subscription: {
+                    plan: subscriptionPlan,
+                    price: subscriptionPlan === 'Premium' ? '₹4,999/mo' : (subscriptionPlan === 'Deluxe' ? '₹9,999/mo' : '₹1,999/mo'),
+                    expiry: new Date(Date.now() + 365*24*60*60*1000).toISOString().split('T')[0],
+                    status: 'Pending'
+                }
+            };
+
+            try {
+                await fetch('http://localhost:5000/api/branches', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(reqPayload)
+                });
+            } catch(e) {
+                console.log("Backend offline, pushing to local pending array.");
+                pendingSalons.push(reqPayload);
+            }
+
+            // Clear form
+            document.getElementById('marketing-salon-name').value = '';
+            document.getElementById('marketing-owner-name').value = '';
+            document.getElementById('marketing-phone').value = '';
+            document.getElementById('marketing-location').value = '';
+            document.getElementById('marketing-doc-aadhaar').value = '';
+            document.getElementById('marketing-doc-pan').value = '';
+            document.getElementById('marketing-doc-license').value = '';
+
+            showToast('Application successfully pushed to Verification & KYC queue in real-time!', 'success');
+            
+            // Re-fetch to populate the Verification queue immediately
+            fetchRealTimeData();
+        }
+
+        function renderMarketingTables() {
+            // Placeholder logic if needed
         }
 
         // KYC Modal Logic
@@ -1807,14 +2121,8 @@
                 btn.innerHTML = originalHtml;
                 btn.disabled = false;
                 
-                logToSandbox(`System config updated. Fee: ${fee}%, Maint: ${maint.toUpperCase()}`, 'success');
                 showToast('System Configuration saved and applied globally!', 'success');
             }, 1200);
-        }
-
-        // Mock Sandbox Logger
-        function logToSandbox(msg, type='info') {
-            console.log(`[SANDBOX ${type.toUpperCase()}] ${msg}`);
         }
 
         // Theme Toggle Logic
@@ -1835,15 +2143,46 @@
             if(typeof renderExtendedTables === 'function') renderExtendedTables();
         }
 
+        async function deleteVendor(id) {
+            if(confirm("Are you sure you want to completely delete this branch? This action cannot be undone.")) {
+                try {
+                    const response = await fetch(`http://localhost:5000/api/branches/${id}`, {
+                        method: 'DELETE',
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    if (response.ok) {
+                        showToast('Branch successfully deleted.', 'success');
+                        fetchRealTimeData();
+                        return;
+                    }
+                } catch(e) {
+                    console.log("Backend offline, attempting local delete");
+                }
+                
+                // Fallback local delete
+                const vIndex = vendors.findIndex(v => String(v.id) === String(id));
+                if(vIndex > -1) {
+                    vendors.splice(vIndex, 1);
+                    showToast('Branch deleted locally.', 'success');
+                    renderVendorTable();
+                    renderExtendedTables();
+                }
+            }
+        }
+
         function signOut() {
             showToast('Signing out of MedhikaArts Super Admin...', 'success');
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminUser');
             setTimeout(() => {
-                window.location.href = 'index.html';
+                window.location.href = 'login.html';
             }, 1500);
         }
 
         // Initial Render
         renderVendorTable();
+        fetchRealTimeData();
+        renderMarketingTables();
 
     </script>
 </body>
